@@ -16,7 +16,7 @@ public extension PrintableObject {
         print(getPrintableString(isFull: false))
     }
     
-    private func getPrintableString(isFull: Bool = true) -> String {
+    internal func getPrintableString(isFull: Bool = true) -> String {
         var description: String = "==============================\n"
         let className = type(of: self)
         

@@ -2,15 +2,46 @@ import XCTest
 @testable import PrintableObject
 
 final class PrintableObjectTests: XCTestCase {
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct
-        // results.
-        let user = User(id: "XXX", name: "Execute", pseudo: "Order", lastName: "66")
-        XCTAssertEqual(user.id, "XXX")
+    
+    let user = User(id: 66, name: "General", pseudo: "Execute", lastName: "Order")
+    
+    let fullString = """
+        ==============================
+        **** User ****
+        - pseudo: Execute
+        - lastName: Order
+
+        ----- Superclass - BaseUser -----
+        - id: 66
+        - name: General
+        ==============================
+        """
+    
+    let partialString = """
+        ==============================
+        **** User ****
+        - pseudo: Execute
+        - lastName: Order
+        ==============================
+        """
+    
+    func testUser() {
+        XCTAssertEqual(user.pseudo, "Execute")
+        XCTAssertEqual(user.lastName, "Order")
+        XCTAssertEqual(user.id, 66)
+        XCTAssertEqual(user.name, "General")
+    }
+    
+    func testGetPrintableString() {
+        let string = user.getPrintableString()
+        let partString = user.getPrintableString(isFull: false)
+        
+        XCTAssertEqual(string, fullString)
+        XCTAssertEqual(partString, partialString)
     }
 
     static var allTests = [
-        ("testExample", testExample),
+        ("testUser", testUser),
+        ("testGetPrintableString", testGetPrintableString),
     ]
 }

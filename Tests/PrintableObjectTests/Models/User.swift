@@ -13,7 +13,7 @@ class User: BaseUser, PrintableObject {
     var pseudo: String
     var lastName: String
     
-    init(id: String, name: String, pseudo: String, lastName: String) {
+    init(id: Int, name: String, pseudo: String, lastName: String) {
         self.pseudo = pseudo
         self.lastName = lastName
         
