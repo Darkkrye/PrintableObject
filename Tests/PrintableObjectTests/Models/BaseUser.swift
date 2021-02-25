@@ -7,8 +7,9 @@
 //
 
 import Foundation
+import PrintableObject
 
-class BaseUser {
+class BaseUser: PrintableObject {
     var id: Int
     var name: String
     

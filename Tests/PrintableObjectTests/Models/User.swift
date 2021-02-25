@@ -9,22 +9,29 @@
 import Foundation
 import PrintableObject
 
-class User: BaseUser, PrintableObject {
+class User: BaseUser {
     var pseudo: String
     var lastName: String
+    
+    init(id: Int, name: String, pseudo: String, lastName: String) {
+        self.pseudo = pseudo
+        self.lastName = lastName
+        
+        super.init(id: id, name: name)
+    }
+}
+
+class SubUser: User {
     var execute: Bool
     
     init(id: Int, name: String, pseudo: String, lastName: String, execute: Bool) {
-        self.pseudo = pseudo
-        self.lastName = lastName
         self.execute = execute
         
-        super.init(id: id, name: name)
+        super.init(id: id, name: name, pseudo: pseudo, lastName: lastName)
     }
 }
 
 struct UserStruct: PrintableObject {
     let pseudo: String
     let lastName: String
-    let execute: Bool
 }

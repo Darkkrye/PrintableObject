@@ -3,15 +3,18 @@ import XCTest
 
 final class PrintableObjectTests: XCTestCase {
     
-    let user = User(id: 66, name: "General", pseudo: "Execute", lastName: "Order", execute: true)
-    let userS = UserStruct(pseudo: "Execute", lastName: "Order", execute: false)
+    let user = User(id: 66, name: "General", pseudo: "Execute", lastName: "Order")
+    let subUser = SubUser(id: 66, name: "General", pseudo: "Execute", lastName: "Order", execute: true)
+    let userS = UserStruct(pseudo: "Execute", lastName: "Order")
     
     let fullString = """
         ==============================
-        **** User ****
+        **** SubUser ****
+        - execute: true (Bool)
+
+        ----- Superclass - User -----
         - pseudo: Execute (String)
         - lastName: Order (String)
-        - execute: true (Bool)
 
         ----- Superclass - BaseUser -----
         - id: 66 (Int)
@@ -24,19 +27,19 @@ final class PrintableObjectTests: XCTestCase {
         **** User ****
         - pseudo: Execute (String)
         - lastName: Order (String)
-        - execute: true (Bool)
         ==============================
         """
     
     func testUser() {
-        XCTAssertEqual(user.pseudo, "Execute")
-        XCTAssertEqual(user.lastName, "Order")
-        XCTAssertEqual(user.id, 66)
-        XCTAssertEqual(user.name, "General")
+        XCTAssertEqual(subUser.pseudo, "Execute")
+        XCTAssertEqual(subUser.lastName, "Order")
+        XCTAssertEqual(subUser.id, 66)
+        XCTAssertEqual(subUser.name, "General")
+        XCTAssertTrue(subUser.execute)
     }
     
     func testGetPrintableString() {
-        let string = user.getPrintableString()
+        let string = subUser.getPrintableString()
         let partString = user.getPrintableString(isFull: false)
         
         XCTAssertEqual(string, fullString)
@@ -44,8 +47,8 @@ final class PrintableObjectTests: XCTestCase {
     }
     
     func testOnStruct() {
-        let result = userS.getPrintableString(isFull: true)
-        let str = partialString.replacingOccurrences(of: "User", with: "UserStruct").replacingOccurrences(of: "true", with: "false")
+        let result = userS.getPrintableString()
+        let str = partialString.replacingOccurrences(of: "User", with: "UserStruct")
         XCTAssertEqual(result, str)
     }
 
